@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+@Entity
 @Table(name = "tbl_modules")
 @NoArgsConstructor
 @AllArgsConstructor

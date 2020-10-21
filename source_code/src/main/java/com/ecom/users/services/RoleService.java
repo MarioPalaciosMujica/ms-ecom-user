@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class RoleService {
 
     public Role save(@NotNull Role entity){
         entity.setIdRole(null);
+        entity.setCreated(new Date());
         entity = roleRepository.save(entity);
         return entity;
     }
@@ -37,6 +39,7 @@ public class RoleService {
     public boolean update(@NotNull Role entity){
         Role original = this.findById( entity.getIdRole());
         if(original != null){
+            entity.setModified(new Date());
             roleRepository.save(entity);
             return true;
         }

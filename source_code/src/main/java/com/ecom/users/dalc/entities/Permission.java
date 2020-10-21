@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.Set;
 
+@Entity
 @Table(name = "tbl_permissions")
 @NoArgsConstructor
 @AllArgsConstructor

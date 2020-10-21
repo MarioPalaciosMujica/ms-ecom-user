@@ -40,7 +40,9 @@ public class UserAccountMap {
     public UserAccount toEntity(UserAccountModel model){
         if(model != null){
             UserAccount entity = new UserAccount();
-            entity.setIdUserAccount(UUID.fromString(model.getIdUserAccount()));
+            if(model.getIdUserAccount() != null){
+                entity.setIdUserAccount(UUID.fromString(model.getIdUserAccount()));
+            }
             entity.setUsername(model.getUsername());
             entity.setPassword(model.getPassword());
             entity.setEmail(model.getEmail());

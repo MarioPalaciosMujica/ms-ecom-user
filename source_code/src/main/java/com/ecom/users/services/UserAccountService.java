@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +18,8 @@ public class UserAccountService {
 
     public UserAccount save(@NotNull UserAccount entity){
         entity.setIdUserAccount(null);
+        entity.setUsername(entity.getEmail());
+        entity.setCreated(new Date());
         entity = userAccountRepository.save(entity);
         return entity;
     }
@@ -38,6 +41,8 @@ public class UserAccountService {
     public boolean update(@NotNull UserAccount entity){
         UserAccount original = this.findById(entity.getIdUserAccount());
         if(original != null){
+            entity.setUsername(entity.getEmail());
+            entity.setModified(new Date());
             userAccountRepository.save(entity);
             return true;
         }

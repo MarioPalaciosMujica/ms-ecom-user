@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
+@Entity
 @Table(name = "tbl_user_contacts")
 @NoArgsConstructor
 @AllArgsConstructor

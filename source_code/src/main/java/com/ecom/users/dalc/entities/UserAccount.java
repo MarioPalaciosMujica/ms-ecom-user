@@ -9,15 +9,21 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.UUID;
 
+@Entity
 @Table(name = "tbl_user_accounts")
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserAccount {
 
+//    @Id
+//    @GeneratedValue(generator = "uuid2", strategy = GenerationType.AUTO)
+//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+//    @Column(name = "id_user_account", updatable = false, nullable = false, unique = true, columnDefinition = "BINARY(16)")
+//    private UUID idUserAccount;
+
     @Id
-    @GeneratedValue(generator = "uuid2", strategy = GenerationType.AUTO)
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(name = "id_user_account", updatable = false, nullable = false, unique = true, columnDefinition = "BINARY(16)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_user_account", updatable = false, nullable = false, unique = true)
     private UUID idUserAccount;
 
     @Column(name = "username", nullable = false)
@@ -50,7 +56,7 @@ public class UserAccount {
     @JoinColumn(name = "id_role")
     private Role role;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user_contact")
     private UserContact userContact;
 
