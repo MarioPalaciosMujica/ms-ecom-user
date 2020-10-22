@@ -27,7 +27,7 @@ public class InitService {
         custDasboardPerm = permissionService.save(custDasboardPerm);
         checkoutPerm = permissionService.save(checkoutPerm);
 
-        Role customer = new Role(null, "Cliente", true, null, null, null,
+        Role customer = new Role(null, "CLIENTE", true, null, null, null,
                 new HashSet<Permission>(Arrays.asList(
                         custDasboardPerm,
                         checkoutPerm

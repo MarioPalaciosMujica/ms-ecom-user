@@ -30,7 +30,7 @@ public class UserAccount {
     @Size(min = 2, max = 50)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, unique = true)
     @Size(min = 2, max = 50)
     private String password;
 

@@ -1,7 +1,11 @@
 package com.ecom.users.services;
 
+import com.ecom.users.dalc.entities.Auth;
+import com.ecom.users.dalc.entities.Login;
+import com.ecom.users.dalc.entities.Role;
 import com.ecom.users.dalc.entities.UserAccount;
 import com.ecom.users.dalc.repositories.IUserAccountRepository;
+import com.ecom.users.enums.RoleEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +19,7 @@ import java.util.UUID;
 public class UserAccountService {
 
     @Autowired private IUserAccountRepository userAccountRepository;
+    @Autowired private RoleService roleService;
 
     public UserAccount save(@NotNull UserAccount entity){
         entity.setIdUserAccount(null);
@@ -58,6 +63,36 @@ public class UserAccountService {
         }
         else {
             return false;
+        }
+    }
+
+    public Auth login(@NotNull Login login){
+        Optional<UserAccount> account = userAccountRepository.findByUsernameAndPassword(login.getUsername(), login.getPassword());
+        if(account.isPresent()){
+            Auth auth = new Auth();
+            auth.setClientName(account.get().getFirstName());
+            auth.setToken(account.get().getIdUserAccount().toString());
+            auth.setRole(account.get().getRole());
+            return auth;
+        }
+        else {
+            return null;
+        }
+    }
+
+    public Auth register(@NotNull UserAccount account){
+        Role clientRole = roleService.findByRoleName(RoleEnum.CLIENTE.toString());
+        if(clientRole != null){
+            account.setRole(clientRole);
+            account = this.save(account);
+            Auth auth = new Auth();
+            auth.setClientName(account.getFirstName());
+            auth.setToken(account.getIdUserAccount().toString());
+            auth.setRole(account.getRole());
+            return auth;
+        }
+        else {
+            return null;
         }
     }
 }

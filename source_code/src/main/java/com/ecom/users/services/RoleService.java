@@ -57,4 +57,14 @@ public class RoleService {
             return false;
         }
     }
+
+    public Role findByRoleName(@NotNull String roleName){
+        Optional<Role> entity = roleRepository.findByRoleName(roleName);
+        if(entity.isPresent()){
+            return entity.get();
+        }
+        else {
+            return null;
+        }
+    }
 }

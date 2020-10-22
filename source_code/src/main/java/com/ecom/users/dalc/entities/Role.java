@@ -2,7 +2,6 @@ package com.ecom.users.dalc.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -20,7 +19,7 @@ public class Role {
     @Column(name = "id_role", updatable = false, nullable = false, unique = true)
     private Long idRole;
 
-    @Column(name = "role_name", nullable = false)
+    @Column(name = "role_name", nullable = false, unique = true)
     @Size(min = 2, max = 50)
     private String roleName;
 

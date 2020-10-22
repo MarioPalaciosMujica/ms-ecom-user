@@ -50,7 +50,9 @@ public class UserAccountMap {
             entity.setLastName(model.getLastName());
             entity.setCreated(dateFormat.stringToDate(model.getCreated()));
             entity.setModified(dateFormat.stringToDate(model.getModified()));
-            entity.setRole(roleMap.toEntity(model.getRole()));
+            if(model.getRole() != null){
+                entity.setRole(roleMap.toEntity(model.getRole()));
+            }
             entity.setUserContact(userContactMap.toEntity(model.getUserContact()));
             return entity;
         }
